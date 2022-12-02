@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:00:08 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/02 16:07:58 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/02 18:44:37 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ char	*get_next_line(int fd)
 	static t_list	*lst = NULL;
 	char			*line;
 
-	if (read(fd, 0, 0) || BUFFER_SIZE <= 0)
+	line = NULL;
+	if (read(fd, 0, 0) == -1 || BUFFER_SIZE <= 0)
 		return (ft_lstclear(&lst, &free), NULL);
 	if (read_and_stash(&lst, fd) == -1)
 		return (ft_lstclear(&lst, &free), NULL);
