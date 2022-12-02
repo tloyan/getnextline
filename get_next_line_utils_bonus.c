@@ -6,31 +6,11 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:18:14 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/02 18:40:10 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:38:50 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-// void	ft_lstclear(t_list **lst, void (*del)(void *))
-// {
-// 	int		i;
-// 	t_list	*tmp;
-
-// 	i = 0;
-// 	while (i < FT_FD_MAX)
-// 	{
-// 		while (lst[i])
-// 		{
-// 			tmp = (lst[i])->next;
-// 			if (del)
-// 				del((lst[i])->content);
-// 			free(lst[i]);
-// 			lst[i] = tmp;
-// 		}
-// 		i = i + 1;
-// 	}
-// }
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

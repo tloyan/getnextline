@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:18:05 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/02 18:42:51 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:42:02 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ char	*get_next_line(int fd)
 	char			*line;
 
 	line = NULL;
-	if (fd > FT_FD_MAX || read(fd, 0, 0) == -1 || BUFFER_SIZE <= 0)
+	if (fd > FT_FD_MAX || read(fd, 0, 0) == -1
+		|| BUFFER_SIZE <= 0 || BUFFER_SIZE > (INT_MAX - 1))
 		return (ft_lstclear(lsts, &free), NULL);
 	if (read_and_stash(&lsts[fd], fd) == -1)
 		return (ft_lstclear(lsts, &free), NULL);

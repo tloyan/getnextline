@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:16:47 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/02 18:44:40 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:39:45 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #  define FT_FD_MAX 256
 # endif
 
+# include <limits.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>

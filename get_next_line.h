@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:58:16 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/02 16:12:42 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:39:10 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define BUFFER_SIZE 4096
 # endif
 
+# include <limits.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
