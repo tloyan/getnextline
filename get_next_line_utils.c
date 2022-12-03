@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:00:11 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/02 16:08:07 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/03 02:34:28 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,15 @@ char	*ft_strchr(const char *s, int c)
 	unsigned long	i;
 
 	if (c == 0)
-		return ((char *)&s[ft_strlen(s)]);
+		return ((char *)(s + ft_strlen(s)));
 	i = 0;
-	while (s[i] != (unsigned char)c && s[i] != 0)
-		i++;
-	if (i == ft_strlen(s))
-		return (NULL);
-	return ((char *)&s[i]);
+	while (s[i])
+	{
+		if (s[i] == (unsigned char)c)
+			return ((char *)(s + i));
+		i = i + 1;
+	}
+	return (NULL);
 }
 
 char	*ft_strdup(const char *s)

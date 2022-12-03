@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:18:05 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/02 20:42:02 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/03 02:46:51 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	read_and_stash(t_list **lst, int fd)
 	char	*buffer;
 	int		readed;
 
+	if (*lst && ft_strchr((*lst)->content, '\n'))
+		return (0);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(*buffer));
 	if (!buffer)
 		return (-1);
@@ -34,20 +36,14 @@ int	read_and_stash(t_list **lst, int fd)
 	return (free(buffer), 0);
 }
 
-size_t	compute_line_len(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	size_t		len;
-	size_t		i;
+	int	len;
 
 	len = 0;
 	while (lst)
 	{
-		i = 0;
-		while (lst->content[i] != 0 && lst->content[i] != '\n')
-			i++;
-		len = len + i;
-		if (lst->content[i] == '\n' && len++)
-			break ;
+		len = len + 1;
 		lst = lst->next;
 	}
 	return (len);
@@ -72,7 +68,7 @@ void	create_line(t_list	*lst, char **line)
 		lst = lst->next;
 	}
 	(*line)[len] = 0;
-	if (!ft_strlen(*line))
+	if (len == 0)
 	{
 		free(*line);
 		*line = NULL;
@@ -117,7 +113,7 @@ char	*get_next_line(int fd)
 		return (ft_lstclear(lsts, &free), NULL);
 	if (read_and_stash(&lsts[fd], fd) == -1)
 		return (ft_lstclear(lsts, &free), NULL);
-	line = malloc((compute_line_len(lsts[fd]) + 1) * sizeof(*line));
+	line = malloc(((ft_lstsize(lsts[fd]) * BUFFER_SIZE) + 1) * sizeof(*line));
 	if (!line)
 		return (ft_lstclear(lsts, &free), NULL);
 	create_line(lsts[fd], &line);
