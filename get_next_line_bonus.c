@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:18:05 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/03 02:46:51 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/16 12:44:45 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd > FT_FD_MAX || read(fd, 0, 0) == -1
 		|| BUFFER_SIZE <= 0 || BUFFER_SIZE > (INT_MAX - 1))
-		return (ft_lstclear(lsts, &free), NULL);
+		return (ft_lstclear(&lsts[fd], &free), NULL);
 	if (read_and_stash(&lsts[fd], fd) == -1)
-		return (ft_lstclear(lsts, &free), NULL);
+		return (ft_lstclear(&lsts[fd], &free), NULL);
 	line = malloc(((ft_lstsize(lsts[fd]) * BUFFER_SIZE) + 1) * sizeof(*line));
 	if (!line)
-		return (ft_lstclear(lsts, &free), NULL);
+		return (ft_lstclear(&lsts[fd], &free), NULL);
 	create_line(lsts[fd], &line);
 	update_stash(&lsts[fd]);
 	return (line);
