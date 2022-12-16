@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:58:16 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/03 02:47:55 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:41:01 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct s_list {
 char	*get_next_line(int fd);
 int		read_and_stash(t_list **lst, int fd);
 int		ft_lstsize(t_list *lst);
-void	create_line(t_list	*lst, char **line);
-void	update_stash(t_list **lst);
+void	create_line(t_list	**lst, char **line);
+void	update_stash(t_list *lst);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 t_list	*ft_lstnew_gnl(t_list **lst, char *buffer);
 size_t	ft_strlen(const char *s);

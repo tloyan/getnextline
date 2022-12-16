@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:00:08 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/16 15:04:40 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:41:10 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,57 +49,50 @@ int	ft_lstsize(t_list *lst)
 	return (len);
 }
 
-void	create_line(t_list	*lst, char **line)
+void	create_line(t_list	**lst, char **line)
 {
 	size_t		len;
 	size_t		i;
-
-	len = 0;
-	while (lst)
-	{
-		i = 0;
-		while (lst->content[i] != 0 && lst->content[i] != '\n')
-			(*line)[len++] = lst->content[i++];
-		if (lst->content[i] == '\n')
-		{
-			(*line)[len++] = lst->content[i++];
-			break ;
-		}
-		lst = lst->next;
-	}
-	(*line)[len] = 0;
-	if (len == 0)
-	{
-		free(*line);
-		*line = NULL;
-	}
-}
-
-void	update_stash(t_list **lst)
-{
-	char		*str;
-	size_t		i;
-	size_t		n;
 	t_list		*tmp;
 
-	while (*lst && !ft_strchr((*lst)->content, '\n'))
+	len = 0;
+	while (*lst)
 	{
+		i = 0;
 		tmp = (*lst)->next;
+		while ((*lst)->content[i] != 0 && (*lst)->content[i] != '\n')
+			(*line)[len++] = (*lst)->content[i++];
+		if ((*lst)->content[i] == '\n')
+		{
+			(*line)[len++] = (*lst)->content[i++];
+			break ;
+		}
 		free((*lst)->content);
 		free(*lst);
 		*lst = tmp;
 	}
-	if (!*lst)
+	(*line)[len] = 0;
+	if (len == 0)
+		return (free(*line), *line = NULL, (void)0);
+}
+
+void	update_stash(t_list *lst)
+{
+	char		*str;
+	size_t		i;
+	size_t		n;
+
+	if (!lst)
 		return ;
-	str = ft_strchr((*lst)->content, '\n') + 1;
+	str = ft_strchr((lst)->content, '\n') + 1;
 	n = ft_strlen(str);
 	i = 0;
 	while (n--)
 	{
-		(*lst)->content[i] = str[i];
+		(lst)->content[i] = str[i];
 		i++;
 	}
-	(*lst)->content[i] = 0;
+	(lst)->content[i] = 0;
 }
 
 char	*get_next_line(int fd)
@@ -115,7 +108,7 @@ char	*get_next_line(int fd)
 	line = malloc(((ft_lstsize(lst) * BUFFER_SIZE) + 1) * sizeof(*line));
 	if (!line)
 		return (ft_lstclear(&lst, &free), NULL);
-	create_line(lst, &line);
-	update_stash(&lst);
+	create_line(&lst, &line);
+	update_stash(lst);
 	return (line);
 }
