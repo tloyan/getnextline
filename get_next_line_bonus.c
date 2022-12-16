@@ -6,7 +6,7 @@
 /*   By: thloyan <thloyan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:18:05 by thloyan           #+#    #+#             */
-/*   Updated: 2022/12/16 13:12:49 by thloyan          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:01:23 by thloyan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,9 @@ char	*get_next_line(int fd)
 	char			*line;
 
 	line = NULL;
-	if (fd >= FT_FD_MAX || fd < 0)
+	if (fd >= FT_FD_MAX || fd < 0
+		|| BUFFER_SIZE <= 0 || BUFFER_SIZE > (INT_MAX - 1))
 		return (NULL);
-	if (read(fd, 0, 0) == -1 || BUFFER_SIZE <= 0 || BUFFER_SIZE > (INT_MAX - 1))
-		return (ft_lstclear(&lsts[fd], &free), NULL);
 	if (read_and_stash(&lsts[fd], fd) == -1)
 		return (ft_lstclear(&lsts[fd], &free), NULL);
 	line = malloc(((ft_lstsize(lsts[fd]) * BUFFER_SIZE) + 1) * sizeof(*line));
